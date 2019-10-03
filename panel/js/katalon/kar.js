@@ -13,6 +13,7 @@ this.log = console; // remove Selenium IDE Log
 
 // read test suite from an HTML string
 function readSuiteFromString(test_suite) {
+    //console.log(test_suite)
     // append on test grid
     var id = "suite" + sideex_testSuite.count;
     sideex_testSuite.count++;
@@ -21,7 +22,8 @@ function readSuiteFromString(test_suite) {
     // name is used for download
     sideex_testSuite[id] = {
         file_name: suiteName + '.html',
-        title: suiteName
+        title: suiteName,
+        department : department
     };
 
     test_case = test_suite.match(/<table[\s\S]*?<\/table>/gi);
@@ -306,8 +308,8 @@ function addContextMenuButton(id, node, menu, isCase) {
 
 // export test case as script
 function saveAsFileOfTestCase(fileName, content) {
-    var link = makeTextFile(content);
-    var downloading = chrome.downloads.download({
+    var link = makeTextFile(fileName, content);
+    var downloading = browser.downloads.download({
         filename: fileName,
         url: link,
         saveAs: true,
@@ -371,6 +373,15 @@ $(function() {
     });
 })
 
+// KAT-BEGIN handle click event for settings button
+$(function() {
+    $('#settings').on('click', function() {
+
+        //handleGenerateToScript();
+        $("#domainDialog").dialog("open");
+    });
+});
+
 function handleGenerateToScript() {
     var selectedTestCase = getSelectedCase();
     if (selectedTestCase) {
@@ -395,7 +406,8 @@ function saveToFile() {
     var fileName = testClassName(getTestCaseName()) + ".xml";
     var content = cm.getValue();
     //saveAsFileOfTestCase(fileName, content);
-    makeTextFile(fileName,content)
+    var link = makeTextFile(fileName,content);
+    link.click()
 }
 
 $(function() {
@@ -413,12 +425,69 @@ $(function() {
             }
         }
     });
+
+    
     dialog.dialog({
         close: function() {
-            // _gaq.push(['_trackEvent', 'app', 'export-' + $("#select-script-language-id").val()]);
+            // _gaq.push(['_trackEvent', 'app', 'export-' + $("#select-script-language-id").val()]);      
+        }
+    });
+
+    var settingDialog = $( "#domainDialog" );
+    settingDialog.dialog({
+        autoOpen: false,
+        modal: true,
+        height: 600,
+        width: '90%',
+        buttons: {
+            "Save Text": saveText,
+            "Get Text...": getText,
+            Close: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+
+    
+    settingDialog.dialog({
+        close: function() {
+            // _gaq.push(['_trackEvent', 'app', 'export-' + $("#select-script-language-id").val()]);      
+        }
+    });
+
+    var newDialog = $( "#newRecord" );
+    newDialog.dialog({
+        autoOpen: false,
+        modal: true,
+        buttons: {
+            "Add": addNewRecord,
+            Cancel: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
+
+    
+    newDialog.dialog({
+        close: function() {
+            // _gaq.push(['_trackEvent', 'app', 'export-' + $("#select-script-language-id").val()]);      
         }
     });
 });
+
+function saveText(){
+    chrome.storage.sync.set({ mytext: "this is a test value" });
+}
+
+function getText(){
+    chrome.storage.sync.get('mytext', function(data) {
+        alert(data.mytext);
+    });
+}
+
+function addNewRecord(){
+
+}
 
 function getCommandsToGenerateScripts() {
     var ret = [];
@@ -633,7 +702,6 @@ function displayOnCodeMirror(language, outputScript) {
     $('.CodeMirror').removeClass('kat-90').addClass('kat-75');
 
     $textarea.data('cm', cm);
-    console.log($textarea.data('cm', cm))
 }
 
 function getTestCaseName() {
@@ -641,10 +709,15 @@ function getTestCaseName() {
     return sideex_testCase[selectedTestCase.id].title;
 }
 
+function getDepartmentName(){
+    
+}
+
 function generateScripts(isExternalCapability, language, newFormatter) {
 
     let commands = getCommandsToGenerateScripts();
     var name = getTestCaseName();
+    var department = getDepartmentName();
 
     var $textarea = $("#txt-script-id");
     var cm = $textarea.data('cm');
@@ -701,12 +774,15 @@ function generateScripts(isExternalCapability, language, newFormatter) {
         };
         displayOnCodeMirror(language, payload.content);
     } else {
+        // XML goes here
+
 
         var testCase = new TestCase(name);
+        
         testCase.commands = commands;
         testCase.formatLocal(name).header = "";
         testCase.formatLocal(name).footer = "";
-
+        
         displayOnCodeMirror(language, format(testCase, name));
 
         $("[id^=formatter-script-language-id-]").remove();
@@ -821,19 +897,7 @@ $(function() {
 
 // KAT-END
 
-// KAT-BEGIN handle click event for settings button
-$(function() {
-    $('#settings').on('click', function() {
-        browser.windows.update(
-            contentWindowId,
-            { focused: true }
-        );
-        chrome.tabs.create({
-            url: chrome.extension.getURL('katalon/options.html'),
-            windowId: contentWindowId
-        }, function(tab){});
-    });
-});
+
 // KAT-END
 
 // KAT-BEGIN add tooltip for button
@@ -950,10 +1014,17 @@ function handleDisplayVariables() {
 // KAT-BEGIN add handler for button "New" click event
 $(function() {
     $('#new').on('click', function() {
-        saveOldCase();
-        $('#add-testCase').click();
+        //saveOldCase();
+        //$('#add-testCase').click();
+        $('#newRecord').dialog("open");
     });
 });
+
+function addNewRecord(){
+    $('#add-testCase').click();
+    $(this).dialog("close")
+}
+
 // KAT-END
 
 // KAT-BEGIN modify toolbar buttons

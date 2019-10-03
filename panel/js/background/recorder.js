@@ -183,7 +183,8 @@ class BackgroundRecorder {
         if (!getSelectedSuite() || !getSelectedCase()) {
             let id = "case" + sideex_testCase.count;
             sideex_testCase.count++;
-            addTestCase("Untitled Test Case", id);
+            addTestCase("Untitled Test Case","Unnamed Department", id);
+            
         }
 
         let testCaseId = getSelectedCase().id;

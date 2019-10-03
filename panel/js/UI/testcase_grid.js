@@ -233,7 +233,7 @@ function appendContextMenu(node, isCase) {
     node.appendChild(ul);
 }
 
-function addTestCase(title, id) {
+function addTestCase(title,department, id) {
     if (!getSelectedSuite()) {
         var suite_id = "suite" + sideex_testSuite.count;
         sideex_testSuite.count++;
@@ -253,6 +253,12 @@ function addTestCase(title, id) {
     // KAT-END
     p.setAttribute("id", id);
     p.setAttribute("contextmenu", "menu" + id);
+
+    var dept = document.createElement("span");
+    dept.innerHTML = escapeHTML(department);
+    dept.setAttribute("id", "departmentName")
+    p.appendChild(dept);
+    
 
     var s_case = getSelectedCase();
     if (s_case) {
@@ -278,7 +284,8 @@ function addTestCase(title, id) {
         document.getElementById("records-grid").innerHTML = escapeHTML('<input id="records-count" type=hidden value=0></input>');
         sideex_testCase[id] = {
             records: "",
-            title: title
+            title: title,
+            department : department
         };
         p.classList.add("modified");
         p.parentNode.getElementsByTagName("strong")[0].classList.add("modified");
@@ -525,12 +532,16 @@ document.getElementById("close-testSuite").addEventListener('click', function(ev
 }, false);
 
 document.getElementById("add-testCase").addEventListener("click", function(event) {
-    var title = prompt("Please enter the Test Case's name", "Untitled Test Case");
-    if (title) {
+    //var title = prompt("Please enter the Test Case's name", "Untitled Test Case");   
+    var recordingName = $('#recording').val()
+    var department = $('#department').val()
+    if (recordingName) {
         var id = "case" + sideex_testCase.count;
         sideex_testCase.count++;
-        addTestCase(title, id);
+        addTestCase(recordingName,department, id);
     }
+
+
 }, false);
 
 var remove_testCase = function() {

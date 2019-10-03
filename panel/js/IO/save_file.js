@@ -92,7 +92,7 @@ var textFile = null
         // textFile = window.URL.createObjectURL(data);
         // return textFile;
 
-        var textFileAsBlob = new Blob([text], {type:'application/xml'}); 
+        var textFileAsBlob = new Blob([text], {type:'text/plain'}); 
     	var downloadLink = document.createElement("a");
     	downloadLink.download =  FileName;
         downloadLink.innerHTML = "Download File";
@@ -102,7 +102,7 @@ var textFile = null
     	{
     		// Chrome allows the link to be clicked
     		// without actually adding it to the DOM.
-    		downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+    		downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
     	}
     	else
     	{
@@ -113,8 +113,9 @@ var textFile = null
     		downloadLink.style.display = "none";
     		document.body.appendChild(downloadLink);
     	}
-    
-    	downloadLink.click();
+        
+        //downloadLink.click();
+        return downloadLink
     };
 
 function downloadSuite(s_suite,callback) {
@@ -128,7 +129,9 @@ function downloadSuite(s_suite,callback) {
             output = output +
                 '<table cellpadding="1" cellspacing="1" border="1">\n<thead>\n<tr><td rowspan="1" colspan="3">' +
                 sideex_testCase[cases[i].id].title +
-                '</td></tr>\n</thead>\n' +
+                ' <dept>'+ 
+                sideex_testCase[cases[i].id].department +
+                '</dept> \n </td></tr>\n</thead>\n' +
                 panelToFile(document.getElementById("records-grid").innerHTML) +
                 '</table>\n';
         }
@@ -136,7 +139,7 @@ function downloadSuite(s_suite,callback) {
             'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:' +
             'lang="en" lang="en">\n<head>\n\t<meta content="text/html; charset=UTF-8" http-equiv="content-type" />\n\t<title>' +
             sideex_testSuite[s_suite.id].title +
-            '</title>\n</head>\n<body>\n' +
+            '</title>\n </head>\n<body>\n' +
             output +
             '</body>\n</html>';
 
@@ -147,10 +150,10 @@ function downloadSuite(s_suite,callback) {
         }
 
         var f_name = sideex_testSuite[s_suite.id].file_name,
-            link = makeTextFile(output);
+            link = makeTextFile(f_name,output);
         var downloading = browser.downloads.download({
             filename: f_name,
-            url: link,
+            url: link.href,
             saveAs: true,
             conflictAction: 'overwrite'
         });
@@ -226,8 +229,8 @@ function savelog() {
     var link = makeTextFile(logcontext);
 
     var downloading = browser.downloads.download({
-        filename: f_name,
-        url: link,
+        filename: "f_name",
+        url: link.href,
         saveAs: true,
         conflictAction: 'overwrite'
     });

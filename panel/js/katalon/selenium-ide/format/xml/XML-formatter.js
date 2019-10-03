@@ -125,15 +125,18 @@ function parse(testCase, source)
  */
 function format(testCase, name)
 {	
+	console.log(sideex_testCase)
+	//console.log(test_case)
 	var dom = getDOMForCommands(testCase.commands);
 	
 	var s = new XMLSerializer(); // https://developer.mozilla.org/en/XMLSerializer
 	var docXML = s.serializeToString(dom);
 	
-	var text = '<?xml version="1.0" encoding="UTF-8"?>';
+	var text = `<?xml version="1.0" encoding="UTF-8"?>
+	<test>hello this is test</test>
+	`;
 	if(options.indentWithTab == 'true') text += '\n'
 	text += docXML;
-	
 	return text;
 }
 

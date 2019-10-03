@@ -1565,3 +1565,9 @@ span.hotKey {
 .is-dragover {
     background-color: #f2f2f2;
 }
+
+/* New Record Dialog */
+
+.block {
+    display:block;
+}

@@ -1091,8 +1091,8 @@ p.test-case-title {
     word-break: break-all;
 }
 
-.test-case-title.modified span::after {
-    content: '\00a0*';
+.test-case-title.modified :first-child:after {
+    content: '\00a0 - \00a0 ';
 }
 
 .test-case-title.modified::after {
