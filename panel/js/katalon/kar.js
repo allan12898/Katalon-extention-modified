@@ -22,12 +22,12 @@ function readSuiteFromString(test_suite) {
     // name is used for download
     sideex_testSuite[id] = {
         file_name: suiteName + '.html',
-        title: suiteName,
-        department : department
+        title: suiteName
     };
 
     test_case = test_suite.match(/<table[\s\S]*?<\/table>/gi);
     if (test_case) {
+        
         for (var i = 0; i < test_case.length; ++i) {
             readCase(test_case[i]);
         }
@@ -44,6 +44,7 @@ function parseSuiteName(test_suite) {
 // load test suite saved in storage upon starting
 $(function() {
     chrome.storage.local.get(null, function(result) {
+        //console.log(result)
         try {
             if (result.data) {
                 if (!result.backup) {
@@ -67,6 +68,7 @@ $(function() {
 
 // get content of a test suite as an HTML string
 function getContentOfTestSuite(s_suite) {
+
     var cases = s_suite.getElementsByTagName("p"),
     output = "",
     old_case = getSelectedCase();
@@ -78,7 +80,9 @@ function getContentOfTestSuite(s_suite) {
             sideex_testCase[cases[i].id].title +
             '</td></tr>\n</thead>\n' +
             panelToFile(document.getElementById("records-grid").innerHTML) +
-            '</table>\n';
+            '<tfoot id="department">'+ 
+            sideex_testCase[cases[i].id].department +
+            '</tfoot> \n   </table>\n ';
     }
     output = '<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" ' +
         'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:' +
@@ -109,6 +113,7 @@ function storeAllTestSuites() {
             data.push(content);
         }
     }
+    
     return data;
 }
 

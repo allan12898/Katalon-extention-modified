@@ -129,11 +129,11 @@ function downloadSuite(s_suite,callback) {
             output = output +
                 '<table cellpadding="1" cellspacing="1" border="1">\n<thead>\n<tr><td rowspan="1" colspan="3">' +
                 sideex_testCase[cases[i].id].title +
-                ' <dept>'+ 
-                sideex_testCase[cases[i].id].department +
-                '</dept> \n </td></tr>\n</thead>\n' +
+                '</td></tr>\n</thead>\n' +
                 panelToFile(document.getElementById("records-grid").innerHTML) +
-                '</table>\n';
+                '<tfoot>'+ 
+                sideex_testCase[cases[i].id].department +
+                '</tfoot> \n</table>\n   ';
         }
         output = '<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" ' +
             'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:' +

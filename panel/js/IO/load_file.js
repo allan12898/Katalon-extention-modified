@@ -86,9 +86,12 @@ function readCase(f) {
     var records = document.getElementById("records-grid").innerHTML;
     //var department = document.getElementById("departmentName").innerHTML
     var case_title = f.match(/(?:<thead>[\s\S]*?<td rowspan="1" colspan="3">)([\s\S]*?)(?:<\/td>)/)[1];
+    var case_dept = f.match(/(?:<tfoot id="department">)([\s\S]*?)(?:<\/tfoot>)/)[1];
+    console.log(case_dept)
     sideex_testCase[id] = {
         records: records,
-        title: case_title
+        title: case_title,
+        department: case_dept
     };
     console.log(sideex_testCase)
     addTestCase(case_title,"", id);
@@ -99,6 +102,7 @@ function readSuite(f) {
     if (!f.name.includes("htm")) return;
     reader.readAsText(f);
 
+    
     reader.onload = function(event) {
         setTimeout(saveData, 0);
         var test_suite = reader.result;
