@@ -123,7 +123,7 @@ function parse(testCase, source)
  * @param testCase TestCase to format
  * @param name The name of the test case, if any. It may be used to embed title into the source.
  */
-function format(testCase, name)
+function format(testCase, name, department)
 {	
 	console.log(sideex_testCase)
 	//console.log(test_case)
@@ -133,7 +133,7 @@ function format(testCase, name)
 	var docXML = s.serializeToString(dom);
 	
 	var text = `<?xml version="1.0" encoding="UTF-8"?>
-	<test>hello this is test</test>
+	<department>${department}</department>
 	`;
 	if(options.indentWithTab == 'true') text += '\n'
 	text += docXML;

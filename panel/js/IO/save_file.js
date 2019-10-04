@@ -142,7 +142,6 @@ function downloadSuite(s_suite,callback) {
             '</title>\n </head>\n<body>\n' +
             output +
             '</body>\n</html>';
-
         if (old_case) {
             setSelectedCase(old_case.id);
         } else {

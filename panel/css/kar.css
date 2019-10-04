@@ -1091,9 +1091,13 @@ p.test-case-title {
     word-break: break-all;
 }
 
-.test-case-title.modified :first-child:after {
+/* .test-case-title.modified :first-child:after {
+    content: '\00a0 - \00a0 ';
+} */
+.test-case-title :first-child:after {
     content: '\00a0 - \00a0 ';
 }
+
 
 .test-case-title.modified::after {
     display: none;

@@ -490,9 +490,6 @@ function getText(){
     });
 }
 
-function addNewRecord(){
-
-}
 
 function getCommandsToGenerateScripts() {
     var ret = [];
@@ -715,7 +712,8 @@ function getTestCaseName() {
 }
 
 function getDepartmentName(){
-    
+    var selectedTestCase = getSelectedCase();
+    return sideex_testCase[selectedTestCase.id].department;
 }
 
 function generateScripts(isExternalCapability, language, newFormatter) {
@@ -788,7 +786,7 @@ function generateScripts(isExternalCapability, language, newFormatter) {
         testCase.formatLocal(name).header = "";
         testCase.formatLocal(name).footer = "";
         
-        displayOnCodeMirror(language, format(testCase, name));
+        displayOnCodeMirror(language, format(testCase, name, department));
 
         $("[id^=formatter-script-language-id-]").remove();
         var script = document.createElement('script');
