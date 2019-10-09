@@ -15,6 +15,44 @@
  *
  */
 
+function startBackgroundRecording(){
+    console.log("recording")
+    isRecording = !isRecording;
+    if (isRecording) {
+        recorder.attach(); //start record
+        notificationCount = 0;
+        // KAT-BEGIN focus on window when recording
+        if (contentWindowId) {
+            browser.windows.update(contentWindowId, {focused: true});
+        }
+        // KAT-END
+        browser.tabs.query({windowId: extCommand.getContentWindowId(), url: "<all_urls>"})
+        .then(function(tabs) {
+            for(let tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {attachRecorder: true});
+            }
+        });
+        // KAT-BEGIN add space for record button label
+        recordButton.childNodes[1].textContent = " Stop";
+        switchRecordButton(false);
+        // KAT-END
+    }
+    else { 
+        recorder.detach(); //stop record
+        browser.tabs.query({windowId: extCommand.getContentWindowId(), url: "<all_urls>"})
+        .then(function(tabs) {
+            for(let tab of tabs) {
+                browser.tabs.sendMessage(tab.id, {detachRecorder: true});
+            }
+        });
+        // KAT-BEGIN add space for record button label
+        recordButton.childNodes[1].textContent = " Record";
+        switchRecordButton(true);
+        // KAT-END
+    }
+
+}
+
 var blockStack = [];
 var labels = {};
 var expectingLabel = null;
@@ -42,6 +80,7 @@ var implicitTime = "";
 
 var caseFailed = false;
 var extCommand = new ExtCommand();
+
 
 // TODO: move to another file
 window.onload = function() {
@@ -127,44 +166,51 @@ window.onload = function() {
     })
     KAT-END */
 
+    
+
     recordButton.addEventListener("click", function(){
 
         // _gaq.push(['_trackEvent', 'app', 'record']);
 
         isRecording = !isRecording;
         if (isRecording) {
-            recorder.attach();
-            notificationCount = 0;
-            // KAT-BEGIN focus on window when recording
-            if (contentWindowId) {
-                browser.windows.update(contentWindowId, {focused: true});
-            }
-            // KAT-END
-            browser.tabs.query({windowId: extCommand.getContentWindowId(), url: "<all_urls>"})
-            .then(function(tabs) {
-                for(let tab of tabs) {
-                    browser.tabs.sendMessage(tab.id, {attachRecorder: true});
-                }
-            });
-            // KAT-BEGIN add space for record button label
-            recordButton.childNodes[1].textContent = " Stop";
+            // recorder.attach(); //start record
+            // notificationCount = 0;
+            // // KAT-BEGIN focus on window when recording
+            // if (contentWindowId) {
+            //     browser.windows.update(contentWindowId, {focused: true});
+            // }
+            // // KAT-END
+            // browser.tabs.query({windowId: extCommand.getContentWindowId(), url: "<all_urls>"})
+            // .then(function(tabs) {
+            //     for(let tab of tabs) {
+            //         browser.tabs.sendMessage(tab.id, {attachRecorder: true});
+            //     }
+            // });
+            // // KAT-BEGIN add space for record button label
+            // recordButton.childNodes[1].textContent = " Stop";
             switchRecordButton(false);
             // KAT-END
         }
-        else {
-            recorder.detach();
-            browser.tabs.query({windowId: extCommand.getContentWindowId(), url: "<all_urls>"})
-            .then(function(tabs) {
-                for(let tab of tabs) {
-                    browser.tabs.sendMessage(tab.id, {detachRecorder: true});
-                }
-            });
-            // KAT-BEGIN add space for record button label
-            recordButton.childNodes[1].textContent = " Record";
+        else { 
+            // recorder.detach(); //stop record
+            // browser.tabs.query({windowId: extCommand.getContentWindowId(), url: "<all_urls>"})
+            // .then(function(tabs) {
+            //     for(let tab of tabs) {
+            //         browser.tabs.sendMessage(tab.id, {detachRecorder: true});
+            //     }
+            // });
+            // // KAT-BEGIN add space for record button label
+            // recordButton.childNodes[1].textContent = " Record";
             switchRecordButton(true);
             // KAT-END
         }
-    })
+    });
+
+
+
+
+
     playButton.addEventListener("click", function() {
         saveData();
         emptyNode(document.getElementById("logcontainer"));

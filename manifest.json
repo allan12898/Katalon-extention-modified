@@ -76,12 +76,16 @@
             "common/browser-polyfill.js",
             "background/background.js",
             "background/install.js",
-            "background/kar.js"
+            "background/kar.js",
+            "content/recorder.js",
+            "panel/js/background/playback.js",
+            "panel/js/background/editor.js"
         ]
     },
 
     "browser_action":
     {
+        "default_popup": "panel/index.html",
         "default_icon": "katalon/images/branding_16.png",
         "default_title": "My Own Katalon Recorder"
     },
