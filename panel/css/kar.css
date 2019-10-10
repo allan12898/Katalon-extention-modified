@@ -280,7 +280,7 @@ section#main {
 .width_quarter {
     display: flex;
     flex-direction: column;
-    height: calc(70% - 20px);
+    height: calc(100% - 20px);
     flex-grow: 1;
     flex-shrink: 1;
     /* border-top: 1px solid #D4D4D4;
@@ -546,7 +546,7 @@ div.test-suite-title {
     flex-grow: 1;
     flex-shrink: 1;
     border-radius: 0 5px 5px 0;
-    height: calc(70% - 20px);
+    height: calc(100% - 20px);
     width: 70%;
     float: none;
     border-left: 1px solid #D4D4D4;

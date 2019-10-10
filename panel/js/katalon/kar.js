@@ -1066,7 +1066,7 @@ $(function() {
 
 $(function() {
     var manifestData = chrome.runtime.getManifest();
-    $(document).attr('title', 'Katalon Recorder ' + manifestData.version)
+    $(document).attr('title', manifestData.name+ " " + manifestData.version)
 });
 
 // KAT-BEGIN clear "Save" and "Clear" text
@@ -1120,7 +1120,7 @@ function showDialog(html, showOK) {
     return $('<div></div>')
         .html(html)
         .dialog({
-            title: 'Katalon Recorder',
+            title: 'Qubot',
             resizable: false,
             height: "auto",
             width: 400,
