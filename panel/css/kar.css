@@ -43,6 +43,7 @@ section#main {
     height: 36px;
     margin-left: 10px;
     margin-right: 10px;
+    background: none !important;
 }
 
 .sub_btn {
@@ -267,7 +268,7 @@ section#main {
 
 .module_all {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     flex-grow: 1;
     flex-shrink: 1;
@@ -275,6 +276,7 @@ section#main {
     margin-right: 10px;
     width: calc(100% - 20px);
     height: calc(100% - 56px);
+    padding: 0px;
 }
 
 .width_quarter {
@@ -294,6 +296,7 @@ section#main {
 
 .module {
     border: 1px solid #D4D4D4;
+    padding: 0 !important; 
 }
 
 .module header {
@@ -561,7 +564,7 @@ div.test-suite-title {
     flex-shrink: 1;
     flex-direction: column;
     overflow: auto;
-    height: calc(100% - 151px);
+    /* height: calc(100% - 151px); */
     border-bottom: none;
 }
 
@@ -888,11 +891,12 @@ div.test-suite-title {
     width: 100%;
     flex-grow: 1;
     flex-shrink: 1;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 0px !important;
+    margin-bottom: 0px;
     height: 30%;
     border: none;
     box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2);
+    padding: 0px !important;
 }
 
 header.tabs_involved {

@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
 
     <link rel="stylesheet" href="js/katalon/codemirror-5.31.0/lib/codemirror.css">
-    <link rel="stylesheet" href="css/kar.css"/>
+    <link rel="stylesheet" href="css/kar.css" />
     <!-- to hide right button feature -->
     <!--[if lt IE 9]>
     <link rel="stylesheet" href="panel/css/ie.css" type="text/css" media="screen" />
@@ -78,6 +78,88 @@
         </hgroup>
     </header>
     <!-- end of header bar -->
+
+
+    <section id="main" class="column">
+    <div id="tabs" class="module_all">
+        <ul class="submit_link">
+            <li><a href="#libraryTab">Library</a></li>
+            <li><a href="#recordTab">Recording</a></li>
+            <li><a href="#tabs-3">Aenean lacinia</a></li>
+        </ul>
+    
+        <article id="libraryTab"  class="width_full module_right">
+                <!-- <div id="slider" style="display:none"></div> -->
+                <div id="middle-container" class="module">
+                    <header>
+                        <h3 class="suite-container-title">
+                            <div class="suite-container-title">Test Suites</div>
+                            <div id="suite-fun" class="suite-fun">
+                                <div id="suite-open" class="suite-open"><i id="suite-open-icon"
+                                        class="fa fa-folder-open-o suite-open" aria-hidden="true"></i></div>
+                                <div id="suite-plus" class="suite-plus"><i id="suite-plus-icon"
+                                        class="fa fa-plus suite-plus" aria-hidden="true"></i></div>
+                            </div>
+                        </h3>
+                    </header>
+                    <div id="testCase-container" class="case_list">
+                        <!-- Sug: Add animation when dragdrop -->
+                        <div id="testCase-grid" class="module_content">
+                        </div>
+                    </div>
+                </div>
+                <!-- end of messages article -->
+                <article id="result-container" class="module">
+                    <div class="fieldset">
+                        <div class="result-row">
+                            <label id="result1">Passed</label>
+                            <p id="result-runs" class="runs">0</p>
+                        </div>
+                        <div class="result-row">
+                            <label id="result2">Failed</label>
+                            <p id="result-failures" class="failures">0</p>
+                        </div>
+                    </div>
+                </article>
+            </article>
+            <article id="recordTab" class="module ">
+                    <div id="command-container" class="tab_content case_hight">
+                        <div class="smallSection">
+                            <table id="command-grid" class="tablesorter" cellspacing="0">
+                                <thead class="fixed">
+                                    <tr>
+                                        <th style="width: 23%">Command<div class="border"></div>
+                                        </th>
+                                        <th style="width: 40%">Target<div class="border"></div>
+                                        </th>
+                                        <th style="width: 37%">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="records-grid">
+                                    <input id="records-count" type="hidden" value="0">
+                                    </input>
+                                </tbody>
+                            </table>
+                            <div class="record-bottom"></div>
+                        </div>
+                    </div>
+    
+            </article>  
+        <div id="tabs-3">
+            <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula
+                accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent
+                taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu
+                urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem
+                enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+            <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla
+                facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti.
+                Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio.
+                Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat
+                porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas
+                commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+        </div>
+    </div>
+</section>
     <!-- right button feature -->
     <div id="suite-grid-menu" class="menu">
         <ul>
@@ -108,13 +190,20 @@
             <button id="delete-testCase" style="display: none">-Case</button>
             <a download="info.html" id="downloadlink" style="display: none">Download</a>
             <button id="new" class="sub_btn"><i class="fa"></i> New</button>
-            <button id="record" class="sub_btn" style="width: 15%"><i class="fa fa-video-camera" aria-hidden="true"></i> Record</button>
-            <button id="playback" class="sub_btn" style="width: 20%" disabled><i class="fa fa-play" aria-hidden="true"></i> Play</button>
-            <button id="stop" class="sub_btn" style="display: none; width: 20%"><i class="fa fa-stop" aria-hidden="true"></i> Stop</button>
-            <button id="playSuite" class="sub_btn" style="width: 21%" disabled><i class="fa fa-cube" aria-hidden="true"></i> Play Suite</button>
-            <button id="playSuites" class="sub_btn" style="width: 21%" disabled><i class="fa fa-cubes" aria-hidden="true"></i> Play All</button>
-            <button id="pause" class="sub_btn btn_pr" style="width: 15.5%" disabled><i class="fa fa-pause-circle" aria-hidden="true"></i> Pause</button>
-            <button id="resume" class="sub_btn btn_pr" style="display: none; width: 15.5%"><i class="fa fa-reply" aria-hidden="true"></i> Resume</button>
+            <button id="record" class="sub_btn" style="width: 15%"><i class="fa fa-video-camera" aria-hidden="true"></i>
+                Record</button>
+            <button id="playback" class="sub_btn" style="width: 20%" disabled><i class="fa fa-play"
+                    aria-hidden="true"></i> Play</button>
+            <button id="stop" class="sub_btn" style="display: none; width: 20%"><i class="fa fa-stop"
+                    aria-hidden="true"></i> Stop</button>
+            <button id="playSuite" class="sub_btn" style="width: 21%" disabled><i class="fa fa-cube"
+                    aria-hidden="true"></i> Play Suite</button>
+            <button id="playSuites" class="sub_btn" style="width: 21%" disabled><i class="fa fa-cubes"
+                    aria-hidden="true"></i> Play All</button>
+            <button id="pause" class="sub_btn btn_pr" style="width: 15.5%" disabled><i class="fa fa-pause-circle"
+                    aria-hidden="true"></i> Pause</button>
+            <button id="resume" class="sub_btn btn_pr" style="display: none; width: 15.5%"><i class="fa fa-reply"
+                    aria-hidden="true"></i> Resume</button>
             <button id="export" class="sub_btn" style="width: 15%"><i class="fa"></i> Export</button>
             <!-- <div id="speed-wrapper" style="position: relative; flex-grow: 0; flex-shrink: 0;">
                 <button id="speed" class="sub_btn"><i class="fa"></i>&nbsp;</button>
@@ -138,8 +227,10 @@
                         <h3 class="suite-container-title">
                             <div class="suite-container-title">Test Suites</div>
                             <div id="suite-fun" class="suite-fun">
-                                <div id="suite-open" class="suite-open"><i id="suite-open-icon" class="fa fa-folder-open-o suite-open" aria-hidden="true"></i></div>
-                                <div id="suite-plus" class="suite-plus"><i id="suite-plus-icon" class="fa fa-plus suite-plus" aria-hidden="true"></i></div>
+                                <div id="suite-open" class="suite-open"><i id="suite-open-icon"
+                                        class="fa fa-folder-open-o suite-open" aria-hidden="true"></i></div>
+                                <div id="suite-plus" class="suite-plus"><i id="suite-plus-icon"
+                                        class="fa fa-plus suite-plus" aria-hidden="true"></i></div>
                             </div>
                         </h3>
                     </header>
@@ -169,76 +260,16 @@
                         <table id="command-grid" class="tablesorter" cellspacing="0">
                             <thead class="fixed">
                                 <tr>
-                                    <th style="width: 23%">Command<div class="border"></div></th>
-                                    <th style="width: 40%">Target<div class="border"></div></th>
+                                    <th style="width: 23%">Command<div class="border"></div>
+                                    </th>
+                                    <th style="width: 40%">Target<div class="border"></div>
+                                    </th>
                                     <th style="width: 37%">Value</th>
                                 </tr>
                             </thead>
                             <tbody id="records-grid">
                                 <input id="records-count" type="hidden" value="0">
                                 </input>
-
-                                <!-- set input and /tbody in same line to avoid textNode -->
-                                <!--<tr>
-                                    <td>time</td>
-                                    <td>open</td>
-                                    <td>1</td>
-                                </tr>
-                                <tr>
-                                    <td>time</td>
-                                    <td>open</td>
-                                    <td>2</td>
-                                </tr>
-                                <tr>
-                                    <td>time</td>
-                                    <td>open</td>
-                                    <td>3</td>
-                                </tr>
-                                <tr>
-                                    <td>time</td>
-                                    <td>open</td>
-                                    <td>4</td>
-                                </tr>
-                                <tr>
-                                    <td>time</td>
-                                    <td>open</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <td>time</td>
-                                    <td>open</td>
-                                    <td>6</td>
-                                </tr>
-                                <tr>
-                                    <td>time</td>
-                                    <td>open</td>
-                                    <td>7</td>
-                                </tr>
-                                <tr>
-                                    <td>time</td>
-                                    <td>open</td>
-                                    <td>8</td>
-                                </tr>
-                                <tr>
-                                    <td>time</td>
-                                    <td>open</td>
-                                    <td>9</td>
-                                </tr>
-                                <tr>
-                                    <td>time</td>
-                                    <td>open</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td>time</td>
-                                    <td>open</td>
-                                    <td>11</td>
-                                </tr>
-                                <tr>
-                                    <td>time</td>
-                                    <td>open</td>
-                                    <td>12</td>
-                                </tr>-->
                             </tbody>
                         </table>
                         <div class="record-bottom"></div>
@@ -255,7 +286,8 @@
                         <!-- TODO: make (command &) target selectable -->
                         <div class="command-row">
                             <label>Command</label>
-                            <input id="command-command" list="command-command-list" type="text"><i id="command-" class="fa fa-chevron-down" aria-hidden="true"></i>
+                            <input id="command-command" list="command-command-list" type="text"><i id="command-"
+                                class="fa fa-chevron-down" aria-hidden="true"></i>
                             <div id="command-dropdown" class="w3-dropdown-content w3-bar-block">
                             </div>
                         </div>
@@ -263,11 +295,14 @@
                         </datalist>
                         <div class="command-row">
                             <label>Target</label>
-                            <input id="command-target" list="command-target-list" type="text"><i id="target-" class="fa fa-chevron-down" aria-hidden="true"></i>
+                            <input id="command-target" list="command-target-list" type="text"><i id="target-"
+                                class="fa fa-chevron-down" aria-hidden="true"></i>
                             <div id="target-dropdown" class="w3-dropdown-content w3-bar-block">
                             </div>
-                            <button id="selectElementButton" class="btn_sf" style="width: 60px" tabindex="-1">Select</button>
-                            <button id="showElementButton" class="btn_sf" style="width: 50px" tabindex="-1">Find</button>
+                            <button id="selectElementButton" class="btn_sf" style="width: 60px"
+                                tabindex="-1">Select</button>
+                            <button id="showElementButton" class="btn_sf" style="width: 50px"
+                                tabindex="-1">Find</button>
                         </div>
                         <datalist id="command-target-list">
                         </datalist>
@@ -281,23 +316,27 @@
             </article>
             <!-- end of content manager article -->
             <div class="clear"></div>
-            <article class="module width_full"  multiple style="display: none">
+            <article class="module width_full" multiple style="display: none">
                 <header class="tabs_involved">
                     <ul class="tabs2">
-                    <li id="history-log"><a>Log</a></li>
-                    <li id="screenshot"><a>Screenshots</a></li>
-                    <li id="variable-log"><a>Variables</a></li>
-                    <li id="data-files"><a>Data Driven</a></li>
-                    <li id="extensions"><a>Extension Scripts</a></li>
-                    <li id="reference-log"><a>Reference</a></li>
+                        <li id="history-log"><a>Log</a></li>
+                        <li id="screenshot"><a>Screenshots</a></li>
+                        <li id="variable-log"><a>Variables</a></li>
+                        <li id="data-files"><a>Data Driven</a></li>
+                        <li id="extensions"><a>Extension Scripts</a></li>
+                        <li id="reference-log"><a>Reference</a></li>
                     </ul>
                     <ul class="tabs">
-                        <li id="ka-upload"><a title="Upload logs to Katalon Analytics to keep track of execution history, access to automation dashboard and reports."><i></i> Reports</a></li>
+                        <li id="ka-upload"><a
+                                title="Upload logs to Katalon Analytics to keep track of execution history, access to automation dashboard and reports."><i></i>
+                                Reports</a></li>
                         <li id="save-log"><a title="Save logs as...">Save</a></li>
                         <li id="clear-log"><a title="Clear logs">Clear</a></li>
                     </ul>
                     <a href="javascript:void(0);" title="Toggle panel" id="show-hide-bottom-panel">
-                        <img src="/katalon/images/SVG/ic_keyboard_arrow_down_black_18px.svg" data-show="/katalon/images/SVG/ic_keyboard_arrow_up_black_18px.svg" data-hide="/katalon/images/SVG/ic_keyboard_arrow_down_black_18px.svg" alt="Show/Hide">
+                        <img src="/katalon/images/SVG/ic_keyboard_arrow_down_black_18px.svg"
+                            data-show="/katalon/images/SVG/ic_keyboard_arrow_up_black_18px.svg"
+                            data-hide="/katalon/images/SVG/ic_keyboard_arrow_down_black_18px.svg" alt="Show/Hide">
                     </a>
                 </header>
                 <div id="tab4" class="tab_content case_roll">
@@ -318,8 +357,10 @@
                             <input id="load-csv-hidden" type="file" multiple style="display: none"></input>
                             <input id="load-json-hidden" type="file" multiple style="display: none"></input>
                             <div class="submit_link">
-                                <button id="data-files-add-csv" class="sub_btn"><img src="/katalon/images/SVG/add-icon.svg"> Add CSV File</button>
-                                <button id="data-files-add-json" class="sub_btn"><img src="/katalon/images/SVG/add-icon.svg"> Add JSON File</button>
+                                <button id="data-files-add-csv" class="sub_btn"><img
+                                        src="/katalon/images/SVG/add-icon.svg"> Add CSV File</button>
+                                <button id="data-files-add-json" class="sub_btn"><img
+                                        src="/katalon/images/SVG/add-icon.svg"> Add JSON File</button>
                             </div>
                             <table>
                                 <thead>
@@ -336,7 +377,8 @@
                         <div id="extensionscontainer" class="file-container">
                             <input id="load-extension-hidden" type="file" multiple style="display: none"></input>
                             <div class="submit_link">
-                                <button id="extension-add" class="sub_btn"><img src="/katalon/images/SVG/add-icon.svg"> Add Extension Script</button>
+                                <button id="extension-add" class="sub_btn"><img src="/katalon/images/SVG/add-icon.svg">
+                                    Add Extension Script</button>
                             </div>
                             <table>
                                 <thead>
@@ -388,43 +430,51 @@
 
         </div>
         <div id="newRecord" title="Add New Recording" style="display: none">
-            <label for="recording" >Recording Name</label>
-        <input type="text" name="recording" id="recording" class="block">
+            <label for="recording">Recording Name</label>
+            <input type="text" name="recording" id="recording" class="block">
             <label for="department">Department</label>
             <input type="text" name="department" id="department" class="block">
-            
+
 
         </div>
 
 
 
         <div id="ka-select-project-dialog" title="Select Katalon Analytics Project" style="display: none">
-            <label for="select-ka-project">Select a project to upload your logs. You can create new projects at <a target="_blank" href="https://analytics.katalon.com" class="katalon-link">https://analytics.katalon.com</a>.</label>
+            <label for="select-ka-project">Select a project to upload your logs. You can create new projects at <a
+                    target="_blank" href="https://analytics.katalon.com"
+                    class="katalon-link">https://analytics.katalon.com</a>.</label>
             <select id="select-ka-project"></select>
         </div>
         <div id="helpDialog" style="display: none">
             <button id="helpDialog-close"></button>
             <h1>Need help? Explore Katalon Recorder Support Resources</h1>
             <div id="panel-container">
-                <a class="panel" href="https://docs.katalon.com/x/cRtO?utm_source=chrome%20recorder%20pop-up" target="_blank">
+                <a class="panel" href="https://docs.katalon.com/x/cRtO?utm_source=chrome%20recorder%20pop-up"
+                    target="_blank">
                     <img src="/katalon/images/SVG/user-manual-icon.svg">
                     <p class="panel-title">User Manual</p>
                     <p class="panel-description">Guides to utilize Katalon Recorder for automation effectively.</p>
                 </a>
-                <a class="panel" href="https://www.katalon.com/videos/katalon-recorder-videos/?utm_source=chrome%20recorder%20pop-up" target="_blank">
+                <a class="panel"
+                    href="https://www.katalon.com/videos/katalon-recorder-videos/?utm_source=chrome%20recorder%20pop-up"
+                    target="_blank">
                     <img src="/katalon/images/SVG/videos-icon.svg">
                     <p class="panel-title">Videos</p>
                     <p class="panel-description">Tutorial videos from our expert users with detailed instruction.</p>
                 </a>
-                <a class="panel" href="https://forum.katalon.com/?utm_source=chrome%20recorder%20pop-up" target="_blank">
+                <a class="panel" href="https://forum.katalon.com/?utm_source=chrome%20recorder%20pop-up"
+                    target="_blank">
                     <img src="/katalon/images/SVG/community-icon.svg">
                     <p class="panel-title">Community</p>
                     <p class="panel-description">Access Katalon fellow users tips and tricks sharing.</p>
                 </a>
-                <a id="katalon-introduction" class="panel" href="https://www.katalon.com?utm_source=chrome%20recorder%20pop-up" target="_blank">
+                <a id="katalon-introduction" class="panel"
+                    href="https://www.katalon.com?utm_source=chrome%20recorder%20pop-up" target="_blank">
                     <img src="/katalon/images/SVG/advanced-icon.svg">
                     <p class="panel-title">Free Advanced Automation</p>
-                    <p class="panel-description">Try Katalon Studio - the best solution for Web, API &amp; Mobile automation.</p>
+                    <p class="panel-description">Try Katalon Studio - the best solution for Web, API &amp; Mobile
+                        automation.</p>
                 </a>
             </div>
         </div>

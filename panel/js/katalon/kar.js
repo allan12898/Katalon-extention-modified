@@ -1063,6 +1063,10 @@ $(function() {
     }
 });
 // KAT-END
+$( function() {
+    $( "#tabs" ).tabs();
+  } );
+
 
 $(function() {
     var manifestData = chrome.runtime.getManifest();
