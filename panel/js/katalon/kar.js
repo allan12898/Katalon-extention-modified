@@ -304,7 +304,7 @@ function addContextMenuButton(id, node, menu, isCase) {
             setSelectedSuite(id);
         }
         var mid = "#" + "menu" + id;
-        $(".menu").css("left", event.pageX);
+        $(".menu").css("left", event.pageX-150);
         $(".menu").css("top", event.pageY);
         $(mid).show();
     }, false);

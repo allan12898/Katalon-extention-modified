@@ -292,7 +292,7 @@ function addCommand(command_name, command_target_array, command_value, auto, ins
     if (!s_suite || !s_case) {
         var id = "case" + sideex_testCase.count;
         sideex_testCase.count++;
-        addTestCase("Untitled Test Case", id);
+        addTestCase("Untitled Recording", id);
     }
 
     // mark modified

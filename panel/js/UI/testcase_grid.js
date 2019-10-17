@@ -85,7 +85,7 @@ function appendContextMenu(node, isCase) {
         add_case.appendChild(a);
         add_case.addEventListener("click", function(event) {
             event.stopPropagation();
-            document.getElementById('add-testCase').click();
+            document.getElementById('newRecord').click();
         }, false);
         ul.appendChild(add_case);
 
@@ -205,7 +205,7 @@ function appendContextMenu(node, isCase) {
         add_case.appendChild(a);
         add_case.addEventListener("click", function(event) {
             event.stopPropagation();
-            document.getElementById('add-testCase').click();
+            document.getElementById('new').click();
         }, false);
         ul.appendChild(add_case);
 
@@ -238,10 +238,10 @@ function addTestCase(title,department, id) {
         var suite_id = "suite" + sideex_testSuite.count;
         sideex_testSuite.count++;
         sideex_testSuite[suite_id] = {
-            file_name: "Untitled Test Suite.html",
-            title: "Untitled Test Suite"
+            file_name: "Untitled Process Name.html",
+            title: "Untitled Process Name"
         };
-        addTestSuite("Untitled Test Suite", suite_id);
+        addTestSuite("Untitled Process Name", suite_id);
     }
 
     var p = document.createElement("p");
@@ -330,6 +330,7 @@ function addTestCase(title,department, id) {
         var mid = "#" + "menu" + id;
         $(".menu").css("left", event.pageX);
         $(".menu").css("top", event.pageY);
+
         $(mid).show();
     }, false);
 
@@ -425,6 +426,7 @@ function addTestSuite(title, id) {
         var mid = "#" + "menu" + id;
         $(".menu").css("left", event.pageX);
         $(".menu").css("top", event.pageY);
+
         $(mid).show();
     }, false);
 
@@ -446,7 +448,7 @@ function modifyCaseSuite() {
 
 document.getElementById("add-testSuite").addEventListener("click", function(event) {
     event.stopPropagation();
-    var title = prompt("Please enter the Test Suite's name", "Untitled Test Suite");
+    var title = prompt("Please enter the Process Name", "Untitled Process Name");
     if (title) {
         var id = "suite" + sideex_testSuite.count;
         sideex_testSuite.count++;

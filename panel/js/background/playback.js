@@ -746,6 +746,7 @@ function switchPR() {
 }
 
 function catchPlayingError(reason) {
+    
     console.log('Playing error', reason);
     // doCommands is depend on test website, so if make a new page,
     // doCommands funciton will fail, so keep retrying to get connection
