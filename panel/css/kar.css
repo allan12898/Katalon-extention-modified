@@ -26,7 +26,7 @@ header#header {
 section#main {
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 90%;
     flex-direction: column;
     background: inherit;
 }
@@ -40,10 +40,21 @@ section#main {
 
 .submit_link {
     min-width: auto;
-    height: 36px;
+    /* height: 36px; */
     margin-left: 10px;
     margin-right: 10px;
-    background: none !important;
+    background: #D7DBDB !important;
+    padding: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
+
+#tabs ul li{
+    margin: 0px 1px 0px 0px;
+    border: none !important;
+}
+#tabs ul{
+    border: none;
 }
 
 .sub_btn {
@@ -269,14 +280,16 @@ section#main {
 .module_all {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     flex-grow: 1;
     flex-shrink: 1;
     margin-left: 10px;
+    margin-top: 10px;
     margin-right: 10px;
     width: calc(100% - 20px);
-    height: calc(100% - 56px);
+    height: calc(80% - 56px);
     padding: 0px;
+    border: none !important;
 }
 
 .width_quarter {
@@ -297,11 +310,12 @@ section#main {
 .module {
     border: 1px solid #D4D4D4;
     padding: 0 !important; 
+    height: 100%;
 }
 
 .module header {
     background: linear-gradient(180deg, #F9F9F9 0%, #F0F1F1 100%);
-    height: 37px;
+    /* height: 29px; */
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     border-bottom: 1px solid #D4D4D4;
@@ -564,7 +578,7 @@ div.test-suite-title {
     flex-shrink: 1;
     flex-direction: column;
     overflow: auto;
-    /* height: calc(100% - 151px); */
+    height: calc(100% - 32px);
     border-bottom: none;
 }
 
@@ -595,7 +609,7 @@ div.test-suite-title {
 }
 
 .tablesorter thead tr {
-    height: 38px;
+    height: 30px;
 }
 
 .tablesorter thead tr th {
@@ -654,7 +668,7 @@ div.test-suite-title {
 
 #command-toolbar {
     /* width: calc(100% - 20px); */
-    height: 151px;
+    height: 32px;
 }
 
 #command-toolbar-buttons {
@@ -702,9 +716,9 @@ div.test-suite-title {
     /* background-color: transparent; */
 }
 
-#command-toolbar-buttons button:active {
-    /* background: linear-gradient(0deg, #FFFFFF 0%, #E0E1DF 100%); */
-}
+/* #command-toolbar-buttons button:active {
+    background: linear-gradient(0deg, #FFFFFF 0%, #E0E1DF 100%);
+} */
 
 #command-toolbar-buttons button:focus {
     outline: none;
@@ -1057,6 +1071,9 @@ h3.suite-container-title {
     align-items: center;
     height: 21px;
     flex-direction: row;
+    padding: 1px 0px 1px 23px;
+    margin: 0px !important;
+    height: 29px;
 }
 
 #main h3 {

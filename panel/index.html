@@ -81,14 +81,14 @@
 
 
     <section id="main" class="column">
-    <div id="tabs" class="module_all">
-        <ul class="submit_link">
-            <li><a href="#libraryTab">Library</a></li>
-            <li><a href="#recordTab">Recording</a></li>
-            <li><a href="#tabs-3">Aenean lacinia</a></li>
-        </ul>
-    
-        <article id="libraryTab"  class="width_full module_right">
+        <div id="tabs" class="module_all">
+            <ul class="submit_link">
+                <li><a href="#libraryTab">Library</a></li>
+                <li><a href="#recordTab">Recording</a></li>
+                <li><a href="#tabs-3">Aenean lacinia</a></li>
+            </ul>
+
+            <article id="libraryTab" class="width_full module_right">
                 <!-- <div id="slider" style="display:none"></div> -->
                 <div id="middle-container" class="module">
                     <header>
@@ -123,43 +123,57 @@
                 </article>
             </article>
             <article id="recordTab" class="module ">
-                    <div id="command-container" class="tab_content case_hight">
-                        <div class="smallSection">
-                            <table id="command-grid" class="tablesorter" cellspacing="0">
-                                <thead class="fixed">
-                                    <tr>
-                                        <th style="width: 23%">Command<div class="border"></div>
-                                        </th>
-                                        <th style="width: 40%">Target<div class="border"></div>
-                                        </th>
-                                        <th style="width: 37%">Value</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="records-grid">
-                                    <input id="records-count" type="hidden" value="0">
-                                    </input>
-                                </tbody>
-                            </table>
-                            <div class="record-bottom"></div>
-                        </div>
+                <div id="command-container" class="tab_content case_hight">
+                    <div class="smallSection">
+                        <table id="command-grid" class="tablesorter" cellspacing="0">
+                            <thead class="fixed">
+                                <tr>
+                                    <th style="width: 23%">Command<div class="border"></div>
+                                    </th>
+                                    <th style="width: 40%">Target<div class="border"></div>
+                                    </th>
+                                    <th style="width: 37%">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody id="records-grid">
+                                <input id="records-count" type="hidden" value="0">
+                                </input>
+                            </tbody>
+                        </table>
+                        <div class="record-bottom"></div>
                     </div>
-    
-            </article>  
-        <div id="tabs-3">
-            <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula
-                accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent
-                taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu
-                urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem
-                enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-            <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla
-                facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti.
-                Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio.
-                Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat
-                porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas
-                commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+                </div>
+                <div id="command-toolbar">
+                    <div id="command-toolbar-buttons">
+                        <button id="grid-add-btn"></button>
+                        <button id="grid-delete-btn"></button>
+                        <button id="grid-copy-btn"></button>
+                        <button id="grid-paste-btn"></button>
+                    </div>
+                </div>
+
+            </article>
+            <div id="tabs-3">
+                <p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel
+                    vehicula
+                    accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent
+                    taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales.
+                    Quisque eu
+                    urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur
+                    lorem
+                    enim, pretium nec, feugiat nec, luctus a, lacus.</p>
+                <p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla
+                    facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse
+                    potenti.
+                    Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget
+                    odio.
+                    Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat
+                    porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas
+                    commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.
+                </p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
     <!-- right button feature -->
     <div id="suite-grid-menu" class="menu">
         <ul>
@@ -221,7 +235,6 @@
         </div>-->
         <div class="module_all">
             <article class="width_quarter module_right">
-                <!-- <div id="slider" style="display:none"></div> -->
                 <div id="middle-container" class="module">
                     <header>
                         <h3 class="suite-container-title">
@@ -235,12 +248,10 @@
                         </h3>
                     </header>
                     <div id="testCase-container" class="case_list">
-                        <!-- Sug: Add animation when dragdrop -->
                         <div id="testCase-grid" class="module_content">
                         </div>
                     </div>
                 </div>
-                <!-- end of messages article -->
                 <article id="result-container" class="module">
                     <div class="fieldset">
                         <div class="result-row">
@@ -283,7 +294,6 @@
                         <button id="grid-paste-btn"></button>
                     </div>
                     <div class="fieldset">
-                        <!-- TODO: make (command &) target selectable -->
                         <div class="command-row">
                             <label>Command</label>
                             <input id="command-command" list="command-command-list" type="text"><i id="command-"
@@ -312,9 +322,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- end of #command-container -->
             </article>
-            <!-- end of content manager article -->
             <div class="clear"></div>
             <article class="module width_full" multiple style="display: none">
                 <header class="tabs_involved">
@@ -396,11 +404,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- end of #tab4 -->
             </article>
-            <!-- end of styles article -->
         </div>
-        <!--<div class="spacer"></div>-->
+
         <div id="generateToScriptsDialog" title="Export Test Case as Script" style="display: none">
             <label for="select-script-language-id">Format </label>
             <select id="select-script-language-id" class="select-script-language">
