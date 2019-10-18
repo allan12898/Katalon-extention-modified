@@ -26,7 +26,14 @@ header#header {
 section#main {
     display: flex;
     width: 100%;
-    height: 90%;
+    height: 100%;
+    flex-direction: column;
+    background: inherit;
+}
+section#command-holder {
+    display: flex;
+    width: 60%;
+    height: 128px;
     flex-direction: column;
     background: inherit;
 }
@@ -562,7 +569,7 @@ div.test-suite-title {
     flex-direction: column;
     flex-grow: 1;
     flex-shrink: 1;
-    border-radius: 0 5px 5px 0;
+    border-radius: 5px;
     height: calc(100% - 20px);
     width: 70%;
     float: none;
@@ -1288,7 +1295,7 @@ img.thumbnail {
 }
 
 .kat-75 {
-    height: 75%;
+    height: 90%;
 }
 
 .ui-dialog .ui-dialog-buttonpane {

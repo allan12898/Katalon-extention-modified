@@ -420,11 +420,11 @@ $(function() {
     dialog.dialog({
         autoOpen: false,
         modal: true,
-        height: 600,
-        width: '90%',
+        height: 500,
+        width: '70%',
         buttons: {
             "Copy to Clipboard": copyToClipboard,
-            "Save As File...": saveToFile,
+            "Save File...": saveToFile,
             Close: function() {
                 $(this).dialog("close");
             }

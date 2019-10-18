@@ -130,7 +130,7 @@ window.onload = function() {
     recordButton.addEventListener("click", function(){
 
         // _gaq.push(['_trackEvent', 'app', 'record']);
-
+        $("#tabs").tabs("option", "active", 1);
         isRecording = !isRecording;
         if (isRecording) {
             recorder.attach();
@@ -164,6 +164,8 @@ window.onload = function() {
             switchRecordButton(true);
             // KAT-END
         }
+
+
     })
     playButton.addEventListener("click", function() {
         saveData();

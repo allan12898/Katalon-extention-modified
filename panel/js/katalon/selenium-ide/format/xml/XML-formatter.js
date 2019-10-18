@@ -132,9 +132,12 @@ function format(testCase, name, department)
 	var s = new XMLSerializer(); // https://developer.mozilla.org/en/XMLSerializer
 	var docXML = s.serializeToString(dom);
 	
-	var text = `<?xml version="1.0" encoding="UTF-8"?>
-	<department>${department}</department>
-	`;
+	// var text = `<?xml version="1.0" encoding="UTF-8"?>
+	// <department>${department}</department>
+	// `;
+
+	var text = `<?xml version="1.0" encoding="UTF-8"?>	`;
+
 	if(options.indentWithTab == 'true') text += '\n'
 	text += docXML;
 	return text;
