@@ -60,7 +60,7 @@ $(document).ready(function() {
 
     //init dropdown width
     $("#command-dropdown").css({
-        'width': $("#command-command").width() + 29 + "px"
+        'width': $("#command-command").width() + 100 + "%"
     });
     $("#target-dropdown").css({
         'width': $("#command-target").width() + 29 + "px"
@@ -68,7 +68,7 @@ $(document).ready(function() {
     //dropdown width change with input's width
     $(window).resize(function() {
         $("#command-dropdown").css({
-            'width': $("#command-command").width() + 29 + "px"
+            'width': $("#command-command").width() + 100 + "%"
         });
         $("#target-dropdown").css({
             'width': $("#command-target").width() + 29 + "px"

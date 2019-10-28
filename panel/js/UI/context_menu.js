@@ -94,6 +94,9 @@ document.getElementById("grid-add").addEventListener("click", function() {
     addCommandManu("", [
         [""]
     ], "");
+
+    //open command dialog
+    commandDialog.dialog('open');
 }, false);
 
 document.getElementById("grid-deleteAll").addEventListener("click", function() {

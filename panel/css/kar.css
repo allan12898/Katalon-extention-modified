@@ -33,7 +33,7 @@ section#main {
 section#command-holder {
     display: flex;
     width: 60%;
-    height: 128px;
+    height: 100px;
     flex-direction: column;
     background: inherit;
 }
@@ -916,7 +916,7 @@ div.test-suite-title {
     margin-bottom: 0px;
     height: 30%;
     border: none;
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2);
+    /* box-shadow: 0 1px 1px 0 rgba(0,0,0,0.2); */
     padding: 0px !important;
 }
 
