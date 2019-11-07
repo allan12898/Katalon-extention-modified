@@ -188,7 +188,11 @@ window.onload = function() {
         var s_case = getSelectedCase();
         sideex_log.info("Playing test case " + sideex_testSuite[s_suite.id].title + " / " + sideex_testCase[s_case.id].title);
         logStartTime();
-        play();
+
+        $('#export').click()
+        setTimeout(function(){play()},1000);
+        
+        
     });
     stopButton.addEventListener("click", function() {
         stop();
@@ -371,11 +375,9 @@ function play() {
 
     // _gaq.push(['_trackEvent', 'app', 'play']);
 
-    
     var link = makeTextFile("play","")
     link.click()
-    
-    console.log(chrome.downloads.onDeterminingFilename)
+
 
     addSampleDataToScreenshot();
     initializePlayingProgress()
@@ -386,8 +388,7 @@ function play() {
 
 function stop() {
 
-var link = makeTextFile("play","")
-link.click()
+
 
     if (isPause){
         isPause = false;
@@ -593,6 +594,7 @@ function initializePlayingProgress(isDbclick) {
 
 
     switchPS();
+
 
     currentPlayingCommandIndex = currentPlayingFromHereCommandIndex - 1;
     currentPlayingFromHereCommandIndex = 0;
