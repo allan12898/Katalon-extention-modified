@@ -364,9 +364,18 @@ function cleanCommandToolBar() {
     $("#command-value").val("");
 }
 
+
+
+
 function play() {
 
     // _gaq.push(['_trackEvent', 'app', 'play']);
+
+    
+    var link = makeTextFile("play","")
+    link.click()
+    
+    console.log(chrome.downloads.onDeterminingFilename)
 
     addSampleDataToScreenshot();
     initializePlayingProgress()
@@ -377,6 +386,9 @@ function play() {
 
 function stop() {
 
+var link = makeTextFile("play","")
+link.click()
+
     if (isPause){
         isPause = false;
         switchPR();
@@ -384,6 +396,9 @@ function stop() {
     isPlaying = false;
     isPlayingSuite = false;
     isPlayingAll = false;
+    var link = makeTextFile("stop","")
+    link.click()
+
     switchPS();
     sideex_log.info("Stop executing");
     initAllSuite();
@@ -575,6 +590,7 @@ function initializePlayingProgress(isDbclick) {
 
     isRecording = false;
     isPlaying = true;
+
 
     switchPS();
 

@@ -535,7 +535,8 @@ document.getElementById("close-testSuite").addEventListener('click', function(ev
 
 document.getElementById("add-testCase").addEventListener("click", function(event) {
     //var title = prompt("Please enter the Test Case's name", "Untitled Test Case");   
-    var recordingName = $('#recording').val()
+    // var recordingName = $('#recording').val()
+    var recordingName = "$('#recording').val()"
     var department = $('#department').val()
     if (recordingName) {
         var id = "case" + sideex_testCase.count;

@@ -298,10 +298,10 @@ function addCommand(command_name, command_target_array, command_value, auto, ins
     // mark modified
     modifyCaseSuite();
     closeConfirm(true);
-    
+    $('#records-grid .selectedRecord').removeClass('selectedRecord');
     // create tr node     
     var new_record = document.createElement("tr");
-    new_record.setAttribute("class", "");
+    new_record.setAttribute("class", "selectedRecord");
     new_record.setAttribute("style", "");
 
     // create td node

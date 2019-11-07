@@ -419,7 +419,9 @@ function saveToFile() {
     var $textarea = $("#txt-script-id");
     var cm = $textarea.data('cm');
     var format = '.' + window.options.defaultExtension;
-    var fileName = testClassName(getTestCaseName()) + ".xml";
+    // var fileName = testClassName(getTestCaseName()) + ".xml";
+    var fileName = "Record.xml";
+    
     var content = cm.getValue();
     //saveAsFileOfTestCase(fileName, content);
     var link = makeTextFile(fileName, content);
@@ -828,6 +830,9 @@ function generateScripts(isExternalCapability, language, newFormatter) {
         script.async = false; // This is required for synchronous execution
         document.head.appendChild(script);
     }
+    $("#generateToScriptsDialog").dialog( "close" );
+    saveToFile()
+
 }
 // KAT-END
 

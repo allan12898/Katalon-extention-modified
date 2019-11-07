@@ -1,5 +1,6 @@
 // KAT-BEGIN show docs on install or upgrade from 1.0
 chrome.runtime.onInstalled.addListener(function (details) {
+
     if (details.reason === 'install') {
         chrome.tabs.create({
             url: 'https://alpha.quickreach.co'
@@ -14,5 +15,9 @@ chrome.runtime.onInstalled.addListener(function (details) {
     // }
 });
 
-chrome.runtime.setUninstallURL('https://store.katalon.com/?utm_source=chrome%20store&utm_campaign=uninstalled%20plugin');
+chrome.downloads.onDeterminingFilename.addListener(function (item, suggest) {
+    suggest({filename: '..', conflictAction: 'overwrite'});
+});
+
+// chrome.runtime.setUninstallURL('https://store.katalon.com/?utm_source=chrome%20store&utm_campaign=uninstalled%20plugin');
 // KAT-END

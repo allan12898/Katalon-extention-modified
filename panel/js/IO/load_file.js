@@ -86,7 +86,8 @@ function readCase(f) {
     var records = document.getElementById("records-grid").innerHTML;
     //var department = document.getElementById("departmentName").innerHTML
     var case_title = f.match(/(?:<thead>[\s\S]*?<td rowspan="1" colspan="3">)([\s\S]*?)(?:<\/td>)/)[1];
-    var case_dept = f.match(/(?:<tfoot id="department">)([\s\S]*?)(?:<\/tfoot>)/)[1];
+    // var case_dept = f.match(/(?:<tfoot id="department">)([\s\S]*?)(?:<\/tfoot>)/)[1];
+    var case_dept = "";
     sideex_testCase[id] = {
         records: records,
         title: case_title,
