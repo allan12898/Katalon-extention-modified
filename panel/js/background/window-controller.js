@@ -301,47 +301,47 @@ class ExtCommand {
     }
 
     updateOrCreateTab() {
-        let self = this;
-        return browser.tabs.query({
-                    windowId: self.currentPlayingWindowId,
-                    active: true
-               }).then(function(tabs) {
-                   if (tabs.length === 0) {
-                       return browser.windows.create({
-                          // KAT-BEGIN change to Katalon url
-                          // url: "https://google.com"
-                          url: "https://www.katalon.com"
-                          // KAT-END
-                       }).then(function (window) {
-                           self.setFirstTab(window.tabs[0]);
-                           self.contentWindowId = window.id;
-                           recorder.setOpenedWindow(window.id);
-                           browser.runtime.getBackgroundPage()
-                           .then(function(backgroundWindow) {
-                               backgroundWindow.master[window.id] = recorder.getSelfWindowId();
-                           });
-                       })
-                   } else {
-                       let tabInfo = null;
-                       return browser.tabs.update(tabs[0].id, {
-                                // KAT-BEGIN change to Katalon url
-                                // url: "https://google.com"
-                                url: "https://www.katalon.com"
-                                // KAT-END
-                              }).then(function(tab) {
-                                  tabInfo = tab;
-                                  return self.wait("playingTabStatus", tab.id);
-                              }).then(function() {
-                                  // Firefox did not update url information when tab is updated
-                                  // We assign url manually and go to set first tab
-                                  // KAT-BEGIN change to Katalon url
-                                  // tabInfo.url = "https://google.com";
-                                  tabInfo.url = "https://www.katalon.com";
-                                  // KAT-END
-                                  self.setFirstTab(tabInfo);
-                              })
-                   }
-               })
+        // let self = this;
+        // return browser.tabs.query({
+        //             windowId: self.currentPlayingWindowId,
+        //             active: true
+        //        }).then(function(tabs) {
+        //            if (tabs.length === 0) {
+        //                return browser.windows.create({
+        //                   // KAT-BEGIN change to Katalon url
+        //                    url: "https://google.com"
+        //                   //url: "https://www.katalon.com"
+        //                   // KAT-END
+        //                }).then(function (window) {
+        //                    self.setFirstTab(window.tabs[0]);
+        //                    self.contentWindowId = window.id;
+        //                    recorder.setOpenedWindow(window.id);
+        //                    browser.runtime.getBackgroundPage()
+        //                    .then(function(backgroundWindow) {
+        //                        backgroundWindow.master[window.id] = recorder.getSelfWindowId();
+        //                    });
+        //                })
+        //            } else {
+        //                let tabInfo = null;
+        //                return browser.tabs.update(tabs[0].id, {
+        //                         // KAT-BEGIN change to Katalon url
+        //                          url: "https://google.com"
+        //                         //url: "https://www.katalon.com"
+        //                         // KAT-END
+        //                       }).then(function(tab) {
+        //                           tabInfo = tab;
+        //                           return self.wait("playingTabStatus", tab.id);
+        //                       }).then(function() {
+        //                           // Firefox did not update url information when tab is updated
+        //                           // We assign url manually and go to set first tab
+        //                           // KAT-BEGIN change to Katalon url
+        //                            tabInfo.url = "https://google.com";
+        //                           //tabInfo.url = "https://www.katalon.com";
+        //                           // KAT-END
+        //                           self.setFirstTab(tabInfo);
+        //                       })
+        //            }
+        //        })
     }
 
     setFirstTab(tab) {

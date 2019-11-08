@@ -92,6 +92,7 @@ var textFile = null
         // textFile = window.URL.createObjectURL(data);
         // return textFile;
 
+        
         var textFileAsBlob = new Blob([text], {type:'text/plain'}); 
     	var downloadLink = document.createElement("a");
     	downloadLink.download =  FileName;

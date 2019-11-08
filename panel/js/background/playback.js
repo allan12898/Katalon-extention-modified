@@ -381,8 +381,8 @@ function play() {
 
     addSampleDataToScreenshot();
     initializePlayingProgress()
-        .then(executionLoop)
-        .then(finalizePlayingProgress)
+        // .then(executionLoop)
+        // .then(finalizePlayingProgress)
         .catch(catchPlayingError);
 }
 
