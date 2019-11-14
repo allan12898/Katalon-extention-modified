@@ -13,7 +13,6 @@ this.log = console; // remove Selenium IDE Log
 
 // read test suite from an HTML string
 function readSuiteFromString(test_suite) {
-    //console.log(test_suite)
     // append on test grid
     var id = "suite" + sideex_testSuite.count;
     sideex_testSuite.count++;
@@ -27,7 +26,6 @@ function readSuiteFromString(test_suite) {
 
     test_case = test_suite.match(/<table[\s\S]*?<\/table>/gi);
     if (test_case) {
-
         for (var i = 0; i < test_case.length; ++i) {
             readCase(test_case[i]);
         }
@@ -42,9 +40,8 @@ function parseSuiteName(test_suite) {
 }
 
 // load test suite saved in storage upon starting
-$(function () {
-    chrome.storage.local.get(null, function (result) {
-        //console.log(result)
+$(function() {
+    chrome.storage.local.get(null, function(result) {
         try {
             if (result.data) {
                 if (!result.backup) {
@@ -68,7 +65,6 @@ $(function () {
 
 // get content of a test suite as an HTML string
 function getContentOfTestSuite(s_suite) {
-
     var cases = s_suite.getElementsByTagName("p"),
         output = "",
         old_case = getSelectedCase();
@@ -80,9 +76,7 @@ function getContentOfTestSuite(s_suite) {
             sideex_testCase[cases[i].id].title +
             '</td></tr>\n</thead>\n' +
             panelToFile(document.getElementById("records-grid").innerHTML) +
-            '<tfoot id="department">' +
-            sideex_testCase[cases[i].id].department +
-            '</tfoot> \n   </table>\n ';
+            '</table>\n';
     }
     output = '<?xml version="1.0" encoding="UTF-8"?>\n<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" ' +
         'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:' +
@@ -106,19 +100,18 @@ function storeAllTestSuites() {
     var suites = document.getElementById("testCase-grid").getElementsByClassName("message");
     var length = suites.length;
     var data = [];
-    for (var i = 0; i < length; i++) {
+    for (var i=0; i<length; i++) {
         if (suites[i].id.includes("suite")) {
             var suite = suites[i];
             var content = getContentOfTestSuite(suite);
             data.push(content);
         }
     }
-
     return data;
 }
 
 // store window size upon resizing
-$(window).on('resize', function () {
+$(window).on('resize', function() {
     var data = {
         window: {
             width: window.outerWidth,
@@ -161,7 +154,7 @@ function saveData() {
 }
 
 // save test suite before exiting
-window.addEventListener('beforeunload', function (e) {
+window.addEventListener('beforeunload', function(e) {
     saveData();
 });
 
@@ -175,7 +168,7 @@ function _loadSeleniumCommands() {
         //this.log.debug("func=" + func);
         var r;
         if (func.match(/^do[A-Z]/)) {
-            var action = func.substr(2, 1).toLowerCase() + func.substr(3);
+            var action = func.substr(2,1).toLowerCase() + func.substr(3);
             commands.push(action);
             if (!action.match(/^waitFor/) && nonWaitActions.indexOf(action) < 0) {
                 commands.push(action + "AndWait");
@@ -239,10 +232,10 @@ function _loadSeleniumCommands() {
 }
 
 // load Selenium IDE command reference
-$(function () {
+$(function() {
     $.ajax({
         url: 'js/katalon/selenium-ide/iedoc-core.xml',
-        success: function (document) {
+        success: function(document) {
             Command.apiDocuments = new Array(document);
         },
         async: false,
@@ -251,40 +244,29 @@ $(function () {
 });
 
 // get a command reference
-function scrape(word) {
+function scrape(word){
     emptyNode(document.getElementById("refercontainer"));
     var command = new Command(word);
     var def = command.getDefinition();
-    help_log.logHTML((def) ? def.getReferenceFor(command) : '');
+    help_log.logHTML((def) ? def.getReferenceFor(command): '');
     $('#tab4.case_roll').scrollTop(0);
 }
 
 // modify and add handler for command grid toolbar buttons
-$(function () {
-    $('#grid-add-btn').on('click', function (event) {
-        
-        $("#command-holder").dialog("open");
+$(function() {
+    $('#grid-add-btn').on('click', function(event) {
         $('#grid-add').click();
-        //open command dialog
-
-    });
-    $('#grid-edit').on('click', function (event) {
-        
-        $("#command-holder").dialog("open");
-        //$('#grid-add').click();
-        //open command dialog
-
     });
 
-    $('#grid-delete-btn').on('click', function (event) {
+    $('#grid-delete-btn').on('click', function(event) {
         $('#grid-delete').click();
     });
 
-    $('#grid-copy-btn').on('click', function (event) {
+    $('#grid-copy-btn').on('click', function(event) {
         $('#grid-copy').click();
     });
 
-    $('#grid-paste-btn').on('click', function (event) {
+    $('#grid-paste-btn').on('click', function(event) {
         $('#grid-paste').click();
     });
 
@@ -308,14 +290,14 @@ function addContextMenuButton(id, node, menu, isCase) {
     buttonWrapper.innerHTML = '<button class="btn-more"><img src="/katalon/images/SVG/more-icon.svg" alt="More" title="More"></button>';
     var button = buttonWrapper.firstChild;
     node.appendChild(button);
-    button.addEventListener("click", function (event) {
+    button.addEventListener("click", function(event) {
         if (isCase) {
             setSelectedCase(id);
         } else {
             setSelectedSuite(id);
         }
         var mid = "#" + "menu" + id;
-        $(".menu").css("left", event.pageX - 150);
+        $(".menu").css("left", event.pageX);
         $(".menu").css("top", event.pageY);
         $(mid).show();
     }, false);
@@ -331,35 +313,34 @@ function saveAsFileOfTestCase(fileName, content) {
         saveAs: true,
         conflictAction: 'overwrite'
     });
-    var result = function (id) {
+    var result = function(id) {
         browser.downloads.onChanged.addListener(function downloadCompleted(downloadDelta) {
             if (downloadDelta.id == id && downloadDelta.state &&
                 downloadDelta.state.current == "complete") {
-                $("#generateToScriptsDialog").dialog("close");
+                $( "#generateToScriptsDialog" ).dialog("close");
             } else if (downloadDelta.id == id && downloadDelta.error) {
                 browser.downloads.onChanged.removeListener(downloadCompleted);
             }
         })
     };
-    var onError = function (error) {
+    var onError = function(error) {
         console.log(error);
     };
     downloading.then(result, onError);
-
 }
 
-$(function () {
-    $("#export").click(function () {
+$(function() {
+    $("#export").click(function() {
 
         // _gaq.push(['_trackEvent', 'app', 'export']);
 
         browser.runtime.sendMessage({
             getExternalCapabilities: true
-        }).then(function (externalCapabilities) {
+        }).then(function(externalCapabilities) {
             var selectInput = $('#select-script-language-id');
             var language = selectInput.val();
             selectInput.find('option.external-exporter').remove();
-            Object.keys(externalCapabilities).forEach(function (capabilityGlobalId) {
+            Object.keys(externalCapabilities).forEach(function(capabilityGlobalId) {
                 var capability = externalCapabilities[capabilityGlobalId];
                 if (capability.type == 'export') {
                     var optionId = 'external-exporter-' + capabilityGlobalId;
@@ -383,20 +364,11 @@ $(function () {
         });
     });
 
-    $("#select-script-language-id").change(function () {
+    $("#select-script-language-id").change(function() {
         handleGenerateToScript();
         saveSetting();
     });
 })
-
-// KAT-BEGIN handle click event for settings button
-$(function () {
-    $('#settings').on('click', function () {
-
-        //handleGenerateToScript();
-        $("#domainDialog").dialog("open");
-    });
-});
 
 function handleGenerateToScript() {
     var selectedTestCase = getSelectedCase();
@@ -415,7 +387,6 @@ function copyToClipboard() {
 }
 
 function saveToFile() {
-
     var $textarea = $("#txt-script-id");
     var cm = $textarea.data('cm');
     var format = '.' + window.options.defaultExtension;
@@ -428,103 +399,28 @@ function saveToFile() {
     link.click()
 }
 
-$(function () {
-    var dialog = $("#generateToScriptsDialog");
+$(function() {
+    var dialog = $( "#generateToScriptsDialog" );
     dialog.dialog({
-        autoOpen: false,
-        modal: true,
-        height: 500,
-        width: '70%',
-        buttons: {
-            "Copy to Clipboard": copyToClipboard,
-            "Save File...": saveToFile,
-            Close: function () {
-                $(this).dialog("close");
-            }
-        }
-    });
-
-
-    dialog.dialog({
-        close: function () {
-            // _gaq.push(['_trackEvent', 'app', 'export-' + $("#select-script-language-id").val()]);      
-        }
-    });
-
-    var settingDialog = $("#domainDialog");
-    settingDialog.dialog({
         autoOpen: false,
         modal: true,
         height: 600,
         width: '90%',
         buttons: {
-            "Save Text": saveText,
-            "Get Text...": getText,
-            Close: function () {
+            "Copy to Clipboard": copyToClipboard,
+            "Save As File...": saveToFile,
+            Close: function() {
                 $(this).dialog("close");
             }
         }
     });
-
-
-    settingDialog.dialog({
-        close: function () {
-            // _gaq.push(['_trackEvent', 'app', 'export-' + $("#select-script-language-id").val()]);      
-        }
-    });
-
-    var newDialog = $("#newRecord");
-    newDialog.dialog({
-        autoOpen: false,
-        modal: true,
-        buttons: {
-            "Add": addNewRecord,
-            Cancel: function () {
-                $(this).dialog("close");
-            }
-        }
-    });
-
-
-    newDialog.dialog({
-        close: function () {
-            // _gaq.push(['_trackEvent', 'app', 'export-' + $("#select-script-language-id").val()]);      
-        }
-    });
-
-    var commandDialog = $("#command-holder");
-    commandDialog.dialog({
-        autoOpen: false,
-        modal: true,
-        height: 240,
-        width: '40%',
-        buttons: {
-            Ok: function () {
-                $(this).dialog("close");
-            }
-        }
-    });
-
-
-
-    commandDialog.dialog({
-        close: function () {
+    dialog.dialog({
+        close: function() {
             // _gaq.push(['_trackEvent', 'app', 'export-' + $("#select-script-language-id").val()]);      
         }
     });
 
 });
-
-function saveText() {
-    chrome.storage.sync.set({ mytext: "this is a test value" });
-}
-
-function getText() {
-    chrome.storage.sync.get('mytext', function (data) {
-        alert(data.mytext);
-    });
-}
-
 
 function getCommandsToGenerateScripts() {
     var ret = [];
@@ -545,8 +441,6 @@ function loadScripts() {
     var scriptNames = [];
     var isExternalCapability = false;
     var newFormatter = null;
-
-
     switch (language) {
         case 'cs-wd-nunit':
             scriptNames = [
@@ -671,13 +565,13 @@ function loadScripts() {
             script.id = "formatter-script-language-id-" + language + '-' + i;
             script.src = scriptNames[i];
             script.async = false; // This is required for synchronous execution
-            script.onload = function () {
+            script.onload = function() {
                 j++;
             }
             document.head.appendChild(script);
         }
         var interval = setInterval(
-            function () {
+            function() {
                 if (j == scriptNames.length) {
                     clearInterval(interval);
                     generateScripts(isExternalCapability, language);
@@ -735,6 +629,7 @@ function displayOnCodeMirror(language, outputScript) {
         codeMirrorOptions.mode = mode;
     }
     var cm = CodeMirror.fromTextArea(textarea, codeMirrorOptions);
+   
     $('.kat').show();
     $('.CodeMirror').removeClass('kat-90').addClass('kat-75');
 
@@ -746,16 +641,11 @@ function getTestCaseName() {
     return sideex_testCase[selectedTestCase.id].title;
 }
 
-function getDepartmentName() {
-    var selectedTestCase = getSelectedCase();
-    return sideex_testCase[selectedTestCase.id].department;
-}
 
 function generateScripts(isExternalCapability, language, newFormatter) {
 
     let commands = getCommandsToGenerateScripts();
     var name = getTestCaseName();
-    var department = getDepartmentName();
 
     var $textarea = $("#txt-script-id");
     var cm = $textarea.data('cm');
@@ -783,20 +673,18 @@ function generateScripts(isExternalCapability, language, newFormatter) {
                     commands: commands
                 }
             }
-        ).then(function (response) {
-            console.log(response)
+        ).then(function(response) {
             var payload = response.payload;
             if (response.status) {
                 options = {
                     defaultExtension: payload.extension,
                     mimetype: payload.mimetype
                 };
-
                 displayOnCodeMirror(language, payload.content);
             } else {
-                throw (payload);
+                throw(payload);
             }
-        }).catch(function (err) {
+        }).catch(function(err) {
             var content = 'Could not export.';
             if (err) {
                 content += ' Error: ' + JSON.stringify(err) + '.';
@@ -804,7 +692,6 @@ function generateScripts(isExternalCapability, language, newFormatter) {
             displayOnCodeMirror(language, content);
         });
     } else if (newFormatter) { //new Formatter
-        console.log(newFormatter)
         var payload = newFormatter(name, commands);
         options = {
             defaultExtension: payload.extension,
@@ -812,16 +699,14 @@ function generateScripts(isExternalCapability, language, newFormatter) {
         };
         displayOnCodeMirror(language, payload.content);
     } else {
+
         // XML goes here
-
-
         var testCase = new TestCase(name);
-
         testCase.commands = commands;
         testCase.formatLocal(name).header = "";
         testCase.formatLocal(name).footer = "";
 
-        displayOnCodeMirror(language, format(testCase, name, department));
+        displayOnCodeMirror(language, format(testCase, name));
 
         $("[id^=formatter-script-language-id-]").remove();
         var script = document.createElement('script');
@@ -837,8 +722,8 @@ function generateScripts(isExternalCapability, language, newFormatter) {
 // KAT-END
 
 // KAT-BEGIN Show/hide bottom panel
-$(function () {
-    $('#show-hide-bottom-panel').click(function (e) {
+$(function() {
+    $('#show-hide-bottom-panel').click(function(e) {
         e.stopPropagation();
         var $bottomContent = $('#tab4');
         $bottomContent.toggle();
@@ -862,7 +747,7 @@ $(function () {
 // KAT-END
 
 // KAT-BEGIN styling log/reference when clicked
-$(function () {
+$(function() {
     var logLi = $('#history-log');
     var referenceLi = $('#reference-log');
     var variableLi = $('#variable-log');
@@ -885,22 +770,22 @@ $(function () {
 
     setActiveTab(logLi, logContainer);
 
-    logLi.on("click", function () {
+    logLi.on("click", function() {
         setActiveTab(logLi, logContainer);
     });
-    referenceLi.on("click", function () {
+    referenceLi.on("click", function() {
         setActiveTab(referenceLi, referenceContainer);
     });
-    variableLi.on("click", function () {
+    variableLi.on("click", function() {
         setActiveTab(variableLi, variableContainer);
     });
-    screenshotLi.on("click", function () {
+    screenshotLi.on("click", function() {
         setActiveTab(screenshotLi, screenshotContainer);
     });
-    dataLi.on('click', function () {
+    dataLi.on('click', function() {
         setActiveTab(dataLi, dataContainer);
     });
-    extensionsLi.on('click', function () {
+    extensionsLi.on('click', function() {
         setActiveTab(extensionsLi, extensionsContainer);
     });
 
@@ -938,11 +823,23 @@ $(function () {
 
 // KAT-END
 
-
+// KAT-BEGIN handle click event for settings button
+$(function() {
+    $('#settings').on('click', function() {
+        browser.windows.update(
+            contentWindowId,
+            { focused: true }
+        );
+        chrome.tabs.create({
+            url: chrome.extension.getURL('katalon/options.html'),
+            windowId: contentWindowId
+        }, function(tab){});
+    });
+});
 // KAT-END
 
 // KAT-BEGIN add tooltip for button
-$(function () {
+$(function() {
     $('#record').attr('title', "Click and navigate to the desired browser tab and record your tests. NOTE: If the tab has been opened before Katalon Recorder was installed, please refresh it.");
     $('#playback').attr('title', "Run selected test case on the active tab, any interference may stop the process. NOTE: If the tab has been opened before Katalon Recorder was installed, please refresh it.");
     $('#playSuite').attr('title', "Run selected test suite on the active tab, any interference may stop the process. NOTE: If the tab has been opened before Katalon Recorder was installed, please refresh it.");
@@ -1007,7 +904,7 @@ $(function () {
 // })
 // KAT-END
 
-$(function () {
+$(function() {
     var slider = $('#slider');
     var sliderContainer = $('#slider-container');
     var speedButton = $('#speed');
@@ -1024,7 +921,7 @@ $(function () {
     sliderContainer.append(slider);
     slider.show();
 
-    speedButton.on("click", function () {
+    speedButton.on("click", function() {
         sliderContainer.toggle();
     });
 })
@@ -1053,23 +950,16 @@ function handleDisplayVariables() {
 // KAT-END
 
 // KAT-BEGIN add handler for button "New" click event
-$(function () {
-    $('#new').on('click', function () {
-        //saveOldCase();
-        //$('#add-testCase').click();
-        $('#newRecord').dialog("open");
+$(function() {
+    $('#new').on('click', function() {
+        saveOldCase();
+        $('#add-testCase').click();
     });
 });
-
-function addNewRecord() {
-    $('#add-testCase').click();
-    $(this).dialog("close")
-}
-
 // KAT-END
 
 // KAT-BEGIN modify toolbar buttons
-$(function () {
+$(function() {
     // var record = $('#record');
     // var newCase = $('#new');
     // record.after(newCase);
@@ -1101,18 +991,14 @@ $(function () {
     }
 });
 // KAT-END
-$(function () {
-    $("#tabs").tabs();
-});
 
-
-$(function () {
+$(function() {
     var manifestData = chrome.runtime.getManifest();
     $(document).attr('title', manifestData.name + " " + manifestData.version)
 });
 
 // KAT-BEGIN clear "Save" and "Clear" text
-$(function () {
+$(function() {
     var saveLog = $('#save-log a');
     var clearLog = $('#clear-log a');
 
@@ -1133,8 +1019,8 @@ function switchRecordButton(stop) {
 }
 
 // KAT-BEGIN disable event propagation when double clicking command toolbar fieldset
-$(function () {
-    $('#command-toolbar .fieldset').on("dblclick", function (event) {
+$(function() {
+    $('#command-toolbar .fieldset').on("dblclick", function(event) {
         event.stopPropagation();
     });
 })
@@ -1152,7 +1038,7 @@ function showDialog(html, showOK) {
     var buttons;
     if (showOK) {
         buttons = {
-            Close: function () {
+            Close: function() {
                 $(this).dialog("close");
             }
         };
@@ -1168,7 +1054,7 @@ function showDialog(html, showOK) {
             width: 400,
             modal: true,
             buttons: buttons,
-            close: function () {
+            close: function() {
                 $(this).remove();
             }
         });
@@ -1178,7 +1064,7 @@ function showErrorDialog() {
     return showDialog('Something went wrong. Please try again later.', true);
 }
 
-$(function () {
+$(function() {
 
     var kaEndpoint = 'https://analytics.katalon.com';
 
@@ -1189,7 +1075,7 @@ $(function () {
         height: 'auto',
         modal: true,
         buttons: {
-            Upload: function () {
+            Upload: function() {
 
                 // _gaq.push(['_trackEvent', 'app', 'upload_ka']);
 
@@ -1204,7 +1090,7 @@ $(function () {
                     data: {
                         projectId: projectId
                     },
-                    success: function (response) {
+                    success: function(response) {
                         var path = response.path;
                         var uploadUrl = response.uploadUrl;
 
@@ -1220,7 +1106,7 @@ $(function () {
                             type: 'PUT',
                             contentType: 'text/plain',
                             data: logcontext,
-                            success: function () {
+                            success: function() {
                                 $.ajax({
                                     url: `${kaEndpoint}/api/v1/katalon-recorder/test-reports`,
                                     type: 'POST',
@@ -1231,50 +1117,50 @@ $(function () {
                                         fileName: 'KR-' + new Date().getTime() + '.log',
                                         uploadedPath: path
                                     },
-                                    success: function () {
+                                    success: function() {
                                         showDialog('Execution logs have been uploaded successfully.', true)
                                     },
-                                    error: function () {
+                                    error: function() {
                                         console.log(arguments);
                                         showErrorDialog();
                                     }
                                 });
                             },
-                            error: function () {
+                            error: function() {
                                 console.log(arguments);
                                 showErrorDialog();
                             }
                         });
                     },
-                    error: function () {
+                    error: function() {
                         console.log(arguments);
                         showErrorDialog();
                     }
                 })
             },
-            Cancel: function () {
+            Cancel: function() {
                 $(this).dialog('close');
             }
         }
     });
 
-    $('#ka-upload').on('click', function () {
+    $('#ka-upload').on('click', function() {
         $.ajax({
             url: `${kaEndpoint}/api/v1/projects`,
             type: 'GET',
             data: {
                 sort: 'name'
             },
-            success: function (data) {
+            success: function(data) {
                 var projects = data.content;
                 var select = $('#select-ka-project');
                 select.empty();
-                projects.forEach(function (project) {
+                projects.forEach(function(project) {
                     select.append($('<option/>').attr('value', project.id).text(project.name));
                 });
                 dialog.dialog('open');
             },
-            error: function (response) {
+            error: function(response) {
                 console.log(response);
                 showDialog('<p>Please log in to <a target="_blank" href="https://analytics.katalon.com" class="katalon-link">Katalon Analytics (Beta)</a> first and try again.</p><p>You can register a completely free account at <a target="_blank" href="https://www.katalon.com" class="katalon-link">https://www.katalon.com</a>.</p><p>Katalon Analytics helps you manage automation results as you test it manually and generate quality, performance and flakiness reports to improve your confidence in evaluating the test results. Katalon Analytics supports both <a target="_blank" href="https://www.katalon.com" class="katalon-link">Katalon Studio</a> (one of the top 10 test automation solutions) and Katalon Recorder.</p><p><a target="_blank" href="https://www.katalon.com/katalon-analytics" class="katalon-link">Learn more</a> about Katalon Analytics (Beta).</p>', true);
             }
@@ -1341,8 +1227,8 @@ function addSampleDataToScreenshot() {
 
 
 // KAT-BEGIN handle event for help button click
-$(function () {
-    $('#help.sub_btn').on('click', function () {
+$(function() {
+    $('#help.sub_btn').on('click', function() {
         $("#helpDialog").dialog({
             autoOpen: false,
             modal: true,
@@ -1350,7 +1236,7 @@ $(function () {
             width: "584px",
             dialogClass: "help-dialog",
             draggable: false,
-            resize: function (event, ui) {
+            resize: function(event, ui) {
                 var size = ui.size;
                 var helpDialog = $('#helpDialog');
                 if (size.width <= 350) {
@@ -1359,10 +1245,10 @@ $(function () {
                     helpDialog.removeClass('small');
                 }
             },
-            open: function (event, ui) {
+            open: function(event, ui) {
                 $('.ui-widget-overlay').addClass("dim-overlay");
             },
-            close: function (event, ui) {
+            close: function(event, ui) {
                 $('#helpDialog').removeClass('small');
                 $('.ui-widget-overlay').removeClass("dim-overlay");
             }
@@ -1372,7 +1258,7 @@ $(function () {
 
         $('#helpDialog').dialog("open");
 
-        $('#helpDialog-close').on("click", function () {
+        $('#helpDialog-close').on("click", function() {
             $('#helpDialog').dialog("close");
         });
     });
@@ -1409,9 +1295,9 @@ function expandForStoreEval(expression) {
     return variables + expression;
 }
 
-$(function () {
+$(function() {
 
-    chrome.storage.local.get('dataFiles', function (result) {
+    chrome.storage.local.get('dataFiles', function(result) {
         dataFiles = result.dataFiles;
         if (!dataFiles) {
             dataFiles = {};
@@ -1420,21 +1306,21 @@ $(function () {
     });
 
     var csvInput = $('#load-csv-hidden');
-    $('#data-files-add-csv').click(function () {
+    $('#data-files-add-csv').click(function() {
         csvInput.click();
     });
     var jsonInput = $('#load-json-hidden');
-    $('#data-files-add-json').click(function () {
+    $('#data-files-add-json').click(function() {
         jsonInput.click();
     });
-    document.getElementById("load-csv-hidden").addEventListener("change", function (event) {
+    document.getElementById("load-csv-hidden").addEventListener("change", function(event) {
         event.stopPropagation();
         for (var i = 0; i < this.files.length; i++) {
             readCsv(this.files[i]);
         }
         this.value = null;
     }, false);
-    document.getElementById("load-json-hidden").addEventListener("change", function (event) {
+    document.getElementById("load-json-hidden").addEventListener("change", function(event) {
         event.stopPropagation();
         for (var i = 0; i < this.files.length; i++) {
             readJson(this.files[i]);
@@ -1446,7 +1332,7 @@ $(function () {
 function readCsv(f) {
     var reader = new FileReader();
     reader.readAsText(f);
-    reader.onload = function (event) {
+    reader.onload = function(event) {
         dataFiles[f.name] = {
             content: reader.result,
             type: 'csv'
@@ -1458,7 +1344,7 @@ function readCsv(f) {
 function readJson(f) {
     var reader = new FileReader();
     reader.readAsText(f);
-    reader.onload = function (event) {
+    reader.onload = function(event) {
         dataFiles[f.name] = {
             content: reader.result,
             type: 'json'
@@ -1491,7 +1377,7 @@ function renderDataListItem(name) {
     var tdName = $('<td></td>').text(name);
     var tdActions = $('<td></td>');
     var renameButton = $('<button class="rename-button"></button>');
-    renameButton.on('click', function () {
+    renameButton.on('click', function() {
         var newName = prompt('Please enter the new name for this data file.', name);
         if (newName.length > 0 && name !== newName) {
             dataFiles[newName] = dataFiles[name];
@@ -1500,7 +1386,7 @@ function renderDataListItem(name) {
         }
     });
     var deleteButton = $('<button class="delete-button"></button>');
-    deleteButton.on('click', function () {
+    deleteButton.on('click', function() {
         if (confirm('Do you want to remove this data file?')) {
             delete dataFiles[name];
             saveDataFiles();
@@ -1529,9 +1415,9 @@ function parseData(name) {
     return dataFile;
 }
 
-$(function () {
+$(function() {
 
-    chrome.storage.local.get('extensions', function (result) {
+    chrome.storage.local.get('extensions', function(result) {
         extensions = result.extensions;
         if (!extensions) {
             extensions = {};
@@ -1540,10 +1426,10 @@ $(function () {
     });
 
     var extensionInput = $('#load-extension-hidden');
-    $('#extension-add').click(function () {
+    $('#extension-add').click(function() {
         extensionInput.click();
     });
-    document.getElementById("load-extension-hidden").addEventListener("change", function (event) {
+    document.getElementById("load-extension-hidden").addEventListener("change", function(event) {
         event.stopPropagation();
         for (var i = 0; i < this.files.length; i++) {
             readExtension(this.files[i]);
@@ -1555,7 +1441,7 @@ $(function () {
 function readExtension(f) {
     var reader = new FileReader();
     reader.readAsText(f);
-    reader.onload = function (event) {
+    reader.onload = function(event) {
         extensions[f.name] = {
             content: reader.result,
             type: 'Extension'
@@ -1588,7 +1474,7 @@ function renderExtensionsListItem(name) {
     var tdName = $('<td></td>').text(name);
     var tdActions = $('<td></td>');
     var renameButton = $('<button class="rename-button"></button>');
-    renameButton.on('click', function () {
+    renameButton.on('click', function() {
         var newName = prompt('Please enter the new name for this extension script.', name);
         if (newName.length > 0 && name !== newName) {
             extensions[newName] = extensions[name];
@@ -1597,7 +1483,7 @@ function renderExtensionsListItem(name) {
         }
     });
     var deleteButton = $('<button class="delete-button"></button>');
-    deleteButton.on('click', function () {
+    deleteButton.on('click', function() {
         if (confirm('Do you want to remove this extension script?')) {
             delete extensions[name];
             saveExtensions();

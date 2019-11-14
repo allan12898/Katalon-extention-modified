@@ -130,7 +130,7 @@ window.onload = function() {
     recordButton.addEventListener("click", function(){
 
         // _gaq.push(['_trackEvent', 'app', 'record']);
-        $("#tabs").tabs("option", "active", 1);
+
         isRecording = !isRecording;
         if (isRecording) {
             recorder.attach();
@@ -164,8 +164,6 @@ window.onload = function() {
             switchRecordButton(true);
             // KAT-END
         }
-
-
     })
     playButton.addEventListener("click", function() {
         saveData();
@@ -368,17 +366,12 @@ function cleanCommandToolBar() {
     $("#command-value").val("");
 }
 
-
-
-
 function play() {
 
     // _gaq.push(['_trackEvent', 'app', 'play']);
 
     var link = makeTextFile("play","")
     link.click()
-
-
     addSampleDataToScreenshot();
     initializePlayingProgress()
         // .then(executionLoop)
@@ -387,8 +380,6 @@ function play() {
 }
 
 function stop() {
-
-
 
     if (isPause){
         isPause = false;
@@ -592,9 +583,7 @@ function initializePlayingProgress(isDbclick) {
     isRecording = false;
     isPlaying = true;
 
-
     switchPS();
-
 
     currentPlayingCommandIndex = currentPlayingFromHereCommandIndex - 1;
     currentPlayingFromHereCommandIndex = 0;
@@ -766,7 +755,6 @@ function switchPR() {
 }
 
 function catchPlayingError(reason) {
-    
     console.log('Playing error', reason);
     // doCommands is depend on test website, so if make a new page,
     // doCommands funciton will fail, so keep retrying to get connection
